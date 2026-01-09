@@ -1,0 +1,14 @@
+[project]
+name = "mcp-phone-agent"
+version = "0.1.0"
+description = "MCP server for Open-AutoGLM Phone Agent"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0.0",
+    "ujson>=5.0.0",
+    "phone-agent",
+]
+
+[tool.uv.sources]
+phone-agent = { path = "../", editable = true }
