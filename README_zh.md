@@ -1,14 +1,12 @@
 # Open-AutoGLM MCP 服务器
 
-这是一个基于项目 Open-AutoGLM （[text](https://github.com/zai-org/Open-AutoGLM)）的 Model Context Protocol (MCP) 服务器，允许您通过 MCP 客户端（如 Claude Desktop 或 Cherry Studio）控制手机（Android）。
+本项目基于 Open-AutoGLM （[text](https://github.com/zai-org/Open-AutoGLM)）的 Model Context Protocol (MCP) 服务器，允许您通过 MCP 客户端（如 Claude Desktop 或 Cherry Studio）控制手机（Android）。
 由于本人仅测试过 Android 设备，因此暂不支持 HarmonyOS 和 iOS。
 ## 前置条件
 
 - 已安装 [uv](https://github.com/astral-sh/uv)
-- 已安装并配置 `adb`（用于 Android）
-- 已安装 `hdc`（用于 HarmonyOS）
-- 已安装 `libimobiledevice` 和 `WebDriverAgent`（用于 iOS）
-- 正在运行的模型 API 端点（例如 vLLM 或本地推理）
+- 已安装并配置 `adb`（用于 Android 设备）
+- 正在运行的多模态模型 API 端点（例如 vLLM 或本地推理）
 
 ## 安装
 
@@ -52,8 +50,12 @@
 | `PHONE_AGENT_LANG` | 系统提示词语言 (`cn` 或 `en`) | `cn` | `en` |
 | `PHONE_AGENT_DEVICE_ID` | 指定要控制的设备 ID (ADB/UUID) | (空) | `xxxxxx` |
 
-注意，以上Deepseek仅作为示范，事实上Deepseek暂无多模态模型，因此无法在本项目中使用。个人推荐使用gemini-3-flash系列模型。
-如果您暂无渠道使用Gemini模型，您可以考虑使用Bigmodel.cn提供的autoglm-phone模型。具体内容请参考原项目。
+> **模型选择建议**：
+> 经过测试，以 **Gemini-3-flash** 为代表的多模态大模型具有极佳的泛化能力，完全可以替代原项目的 `autoglm-phone-9b` 模型。建议优先尝试使用 Gemini-3-flash 进行体验。
+> 当然，您也可以继续使用原项目推荐的 `autoglm-phone` 模型。
+> 
+> 本项目支持任何兼容 **OpenAI SDK** 的大模型平台。只要该平台提供符合 OpenAI 格式的 API（包括 Base URL 和 API Key），您就可以将其配置到本项目中使用。
+
 #### 可用工具
 
 - `run_task(task: str, device_id: str = None)`: 在手机上执行自然语言任务。
