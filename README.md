@@ -30,7 +30,10 @@ This project integrates with clients (like Claude Desktop, Trae) via the Model C
       "env": {
         "PHONE_AGENT_BASE_URL": "http://localhost:8000/v1",
         "PHONE_AGENT_MODEL": "autoglm-phone-9b",
-        "PHONE_AGENT_API_KEY": "EMPTY"
+        "PHONE_AGENT_API_KEY": "EMPTY",
+        "PHONE_AGENT_MAX_STEPS": "100",
+        "PHONE_AGENT_LANG": "cn",
+        "PHONE_AGENT_DEVICE_ID": ""
       }
     }
   }

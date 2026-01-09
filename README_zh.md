@@ -28,7 +28,10 @@
       "env": {
         "PHONE_AGENT_BASE_URL": "http://localhost:8000/v1",
         "PHONE_AGENT_MODEL": "autoglm-phone-9b",
-        "PHONE_AGENT_API_KEY": "EMPTY"
+        "PHONE_AGENT_API_KEY": "EMPTY",
+        "PHONE_AGENT_MAX_STEPS": "100",
+        "PHONE_AGENT_LANG": "cn",
+        "PHONE_AGENT_DEVICE_ID": ""
       }
     }
   }
@@ -140,52 +143,6 @@
    ```bash
    adb connect <手机IP地址>:5555
    ```
-
-## 集成到 Claude Desktop
-
-将以下内容添加到您的 `claude_desktop_config.json` 文件中。请根据您的实际环境修改配置值：
-
-```json
-{
-  "mcpServers": {
-    "phone-agent": {
-      "command": "uv",
-      "args": [
-        "run",
-        "server.py"
-      ],
-      "cwd": "/absolute/path/to/Open-AutoGLM/mcp-server",
-      "env": {
-        "PHONE_AGENT_BASE_URL": "http://localhost:8000/v1",
-        "PHONE_AGENT_MODEL": "autoglm-phone-9b",
-        "PHONE_AGENT_API_KEY": "EMPTY",
-        "PHONE_AGENT_MAX_STEPS": "100",
-        "PHONE_AGENT_LANG": "cn",
-        "PHONE_AGENT_DEVICE_ID": ""
-      }
-    }
-  }
-}
-```
-
-### 参数配置说明
-
-以下是配置文件中各环境变量的详细解释：
-
-- **`PHONE_AGENT_BASE_URL`**: 模型 API 的基础 URL。
-  - 示例: `http://localhost:8000/v1` (本地 vLLM) 或 `https://api.deepseek.com/v1` (云端 API)。
-- **`PHONE_AGENT_MODEL`**: 使用的模型名称。
-  - 示例: `autoglm-phone-9b`。
-- **`PHONE_AGENT_API_KEY`**: 模型 API 鉴权密钥。
-  - 说明: 本地部署通常填 `EMPTY`；云端 API 需填写真实 Key (如 `sk-...`)。
-- **`PHONE_AGENT_MAX_STEPS`**: 单次任务的最大执行步数。
-  - 说明: 用于防止任务陷入死循环，默认 `100`。
-- **`PHONE_AGENT_LANG`**: 系统提示词语言。
-  - 选项: `cn` (中文) 或 `en` (英文)。
-- **`PHONE_AGENT_DEVICE_ID`**: 指定要控制的设备 ID。
-  - 说明: 如果连接了多台设备，在此填入目标设备的 Serial。留空则自动选择第一台。
-
-注意：请将 `/absolute/path/to/Open-AutoGLM/mcp-server` 替换为您本地项目实际的绝对路径。
 
 ## 联系方式
 
