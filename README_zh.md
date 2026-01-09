@@ -1,7 +1,7 @@
 # Open-AutoGLM MCP 服务器
 
-这是一个 Open-AutoGLM 的 Model Context Protocol (MCP) 服务器，允许您通过 MCP 客户端（如 Claude Desktop 或 Trae）控制手机（Android、HarmonyOS、iOS）。
-
+这是一个基于项目 Open-AutoGLM （[text](https://github.com/zai-org/Open-AutoGLM)）的 Model Context Protocol (MCP) 服务器，允许您通过 MCP 客户端（如 Claude Desktop 或 Cherry Studio）控制手机（Android）。
+由于本人仅测试过 Android 设备，因此暂不支持 HarmonyOS 和 iOS。
 ## 前置条件
 
 - 已安装 [uv](https://github.com/astral-sh/uv)
@@ -16,12 +16,28 @@
 
 ## 使用方法
 
-使用 `uv` 运行服务器：
+### MCP 客户端配置
 
-```bash
-cd mcp-server
-uv run server.py
+本项目通过 Model Context Protocol (MCP) 与客户端（如 Claude Desktop、Trae）集成。请在您的客户端配置文件（例如 `claude_desktop_config.json`）中添加以下配置：
+
+```json
+{
+  "mcpServers": {
+    "phone-agent": {
+      "command": "uv",
+      "args": ["run", "server.py"],
+      "cwd": "/absolute/path/to/AutoGLM-mcp-server",
+      "env": {
+        "PHONE_AGENT_BASE_URL": "http://localhost:8000/v1",
+        "PHONE_AGENT_MODEL": "autoglm-phone-9b",
+        "PHONE_AGENT_API_KEY": "EMPTY"
+      }
+    }
+  }
+}
 ```
+
+请务必将 `/absolute/path/to/AutoGLM-mcp-server` 替换为该项目的实际绝对路径。更多环境变量配置请参考[详细配置指南](#详细配置指南)。
 
 ### 详细配置指南
 
@@ -34,9 +50,11 @@ uv run server.py
 | `PHONE_AGENT_API_KEY` | 模型认证的 API 密钥 | `EMPTY` | `sk-xxxxxxxx` |
 | `PHONE_AGENT_MAX_STEPS` | 每个任务的最大执行步数 | `100` | `50` |
 | `PHONE_AGENT_LANG` | 系统提示词语言 (`cn` 或 `en`) | `cn` | `en` |
-| `PHONE_AGENT_DEVICE_ID` | 指定要控制的设备 ID (ADB/UUID) | (空) | `emulator-5554` 或 `00008101-001E30590A08001E` |
+| `PHONE_AGENT_DEVICE_ID` | 指定要控制的设备 ID (ADB/UUID) | (空) | `xxxxxx` |
 
-### 可用工具
+注意，以上Deepseek仅作为示范，事实上Deepseek暂无多模态模型，因此无法在本项目中使用。个人推荐使用gemini-3-flash系列模型。
+如果您暂无渠道使用Gemini模型，您可以考虑使用Bigmodel.cn提供的autoglm-phone模型。具体内容请参考原项目。
+#### 可用工具
 
 - `run_task(task: str, device_id: str = None)`: 在手机上执行自然语言任务。
   - `task`: 任务描述（例如：“打开微信发送消息”）。
