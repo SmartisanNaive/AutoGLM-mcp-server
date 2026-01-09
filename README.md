@@ -16,12 +16,28 @@ This server is managed using `uv`. All dependencies are specified in `pyproject.
 
 ## Usage
 
-Run the server using `uv`:
+### MCP Client Configuration
 
-```bash
-cd mcp-server
-uv run server.py
+This project integrates with clients (like Claude Desktop, Trae) via the Model Context Protocol (MCP). Please add the following configuration to your client's configuration file (e.g., `claude_desktop_config.json`):
+
+```json
+{
+  "mcpServers": {
+    "phone-agent": {
+      "command": "uv",
+      "args": ["run", "server.py"],
+      "cwd": "/absolute/path/to/AutoGLM-mcp-server",
+      "env": {
+        "PHONE_AGENT_BASE_URL": "http://localhost:8000/v1",
+        "PHONE_AGENT_MODEL": "autoglm-phone-9b",
+        "PHONE_AGENT_API_KEY": "EMPTY"
+      }
+    }
+  }
+}
 ```
+
+Please make sure to replace `/absolute/path/to/AutoGLM-mcp-server` with the actual absolute path of this project. For more environment variable configurations, please refer to the [Detailed Configuration Guide](#detailed-configuration-guide).
 
 ### Detailed Configuration Guide
 
@@ -121,52 +137,6 @@ If you want to connect an Android device via Wi-Fi, follow these steps:
    ```bash
    adb connect <Phone_IP>:5555
    ```
-
-## Integration with Claude Desktop
-
-Add the following to your `claude_desktop_config.json`. Please adjust the configuration values according to your actual environment:
-
-```json
-{
-  "mcpServers": {
-    "phone-agent": {
-      "command": "uv",
-      "args": [
-        "run",
-        "server.py"
-      ],
-      "cwd": "/absolute/path/to/Open-AutoGLM/mcp-server",
-      "env": {
-        "PHONE_AGENT_BASE_URL": "http://localhost:8000/v1",
-        "PHONE_AGENT_MODEL": "autoglm-phone-9b",
-        "PHONE_AGENT_API_KEY": "EMPTY",
-        "PHONE_AGENT_MAX_STEPS": "100",
-        "PHONE_AGENT_LANG": "cn",
-        "PHONE_AGENT_DEVICE_ID": ""
-      }
-    }
-  }
-}
-```
-
-### Configuration Parameters Explained
-
-Here is a detailed explanation of each environment variable in the configuration:
-
-- **`PHONE_AGENT_BASE_URL`**: The base URL of the model API.
-  - Example: `http://localhost:8000/v1` (Local vLLM) or `https://api.deepseek.com/v1` (Cloud API).
-- **`PHONE_AGENT_MODEL`**: The model name to use.
-  - Example: `autoglm-phone-9b`.
-- **`PHONE_AGENT_API_KEY`**: Model API authentication key.
-  - Note: Usually `EMPTY` for local deployment; real Key (e.g., `sk-...`) for Cloud API.
-- **`PHONE_AGENT_MAX_STEPS`**: Maximum execution steps per task.
-  - Note: Used to prevent tasks from entering infinite loops, default `100`.
-- **`PHONE_AGENT_LANG`**: System prompt language.
-  - Options: `cn` (Chinese) or `en` (English).
-- **`PHONE_AGENT_DEVICE_ID`**: Device ID to control.
-  - Note: If multiple devices are connected, enter the target device's Serial. Leave empty to auto-select the first one.
-
-Note: Please replace `/absolute/path/to/Open-AutoGLM/mcp-server` with the actual absolute path of your local project.
 
 ## Contact
 
