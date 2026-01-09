@@ -171,3 +171,11 @@ Note: Please replace `/absolute/path/to/Open-AutoGLM/mcp-server` with the actual
 ## Contact
 
 For any questions or support, please contact: jianghanchn@vip.qq.com
+
+## Community & Contribution
+
+Welcome to Star, Fork, and submit PRs to improve this project!
+
+## Acknowledgements
+
+Special thanks to the [Open-AutoGLM](https://github.com/zai-org/Open-AutoGLM) project for their open-source contribution. This project is built upon their core logic.

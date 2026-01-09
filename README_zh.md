@@ -188,3 +188,11 @@
 ## 联系方式
 
 如有任何问题或建议，请联系：jianghanchn@vip.qq.com
+
+## 社区与贡献
+
+欢迎大家 Star、Fork 本项目，也欢迎提交 PR 帮助改进！
+
+## 致谢
+
+特别感谢 [Open-AutoGLM](https://github.com/zai-org/Open-AutoGLM) 项目的开源贡献，本项目基于其核心逻辑开发。
