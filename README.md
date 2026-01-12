@@ -1,14 +1,13 @@
 # Open-AutoGLM MCP Server
 
-This is a Model Context Protocol (MCP) server for Open-AutoGLM, allowing you to control phones (Android, HarmonyOS, iOS) via an MCP client (like Claude Desktop or Trae).
+This project builds a Model Context Protocol (MCP) server based on [Open-AutoGLM](https://github.com/zai-org/Open-AutoGLM), allowing you to control phones (Android) via an MCP client (like Claude Desktop or Trae).
+Since I have only tested it on Android devices, HarmonyOS and iOS are currently not supported.
 
 ## Prerequisites
 
 - [uv](https://github.com/astral-sh/uv) installed
 - `adb` installed and configured (for Android)
-- `hdc` installed (for HarmonyOS)
-- `libimobiledevice` and `WebDriverAgent` (for iOS)
-- A running model API endpoint (e.g., vLLM or local inference)
+- A running multimodal model API endpoint (e.g., vLLM or local inference)
 
 ## Installation
 
@@ -53,8 +52,14 @@ You can configure the server using environment variables. Here is a description 
 | `PHONE_AGENT_API_KEY` | Model API Key | `EMPTY` | `sk-xxxxxxxx` |
 | `PHONE_AGENT_MAX_STEPS` | Max steps per task | `100` | `50` |
 | `PHONE_AGENT_LANG` | System Prompt Language (`cn` or `en`) | `cn` | `en` |
-| `PHONE_AGENT_DEVICE_ID` | Device ID to control (ADB/UUID) | (empty) | `emulator-5554` or `00008101-001E30590A08001E` |
-| `PHONE_AGENT_WDA_URL` | iOS WebDriverAgent URL | `http://localhost:8100` | `http://192.168.1.10:8100` |
+| `PHONE_AGENT_DEVICE_ID` | Device ID to control (ADB/UUID) | (empty) | `emulator-5554` |
+
+> **Model Recommendation**:
+> Tests have shown that multimodal large models represented by **Gemini-3-flash** demonstrate excellent generalization capabilities and can effectively replace the original `autoglm-phone-9b` model. It is recommended to prioritize trying Gemini-3-flash for your experience.
+> Of course, you can also continue to use the `autoglm-phone` model recommended by the original project.
+> For more information about the autoglm-phone-9b model, please refer to the model documentation: [AutoGLM-Phone](https://docs.bigmodel.cn/cn/guide/models/vlm/autoglm-phone)
+>
+> This project supports any large model platform compatible with the **OpenAI SDK**. As long as the platform provides an OpenAI-compliant API (including Base URL and API Key), you can configure it for use in this project.
 
 ### Available Tools
 
