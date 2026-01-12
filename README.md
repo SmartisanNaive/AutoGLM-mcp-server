@@ -1,5 +1,7 @@
 # Open-AutoGLM MCP Server
 
+[中文文档](README_zh.md)
+
 This project builds a Model Context Protocol (MCP) server based on [Open-AutoGLM](https://github.com/zai-org/Open-AutoGLM), allowing you to control phones (Android) via an MCP client (like Claude Desktop or Trae).
 Since I have only tested it on Android devices, HarmonyOS and iOS are currently not supported.
 
